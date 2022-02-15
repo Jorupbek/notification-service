@@ -1,0 +1,42 @@
+[
+  {
+    "model": "client.TimeZone",
+    "pk": 1,
+    "fields": {
+      "time_zone": "+1",
+      "time_city": "Africa/Casablanca"
+    }
+  },
+  {
+    "model": "client.TimeZone",
+    "pk": 2,
+    "fields": {
+      "time_zone": "+2",
+      "time_city": "Asia/Beirut"
+    }
+  },
+  {
+    "model": "client.TimeZone",
+    "pk": 3,
+    "fields": {
+      "time_zone": "+2",
+      "time_city": "Europe/Moscow"
+    }
+  },
+  {
+    "model": "client.OperatorCode",
+    "pk": 1,
+    "fields": {
+      "code": "995",
+      "code_city": "Тинькофф"
+    }
+  },
+  {
+    "model": "client.OperatorCode",
+    "pk": 3,
+    "fields": {
+      "code": "918",
+      "code_city": "МТС"
+    }
+  },
+]

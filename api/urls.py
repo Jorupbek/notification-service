@@ -1,7 +1,9 @@
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
-from api.views import MessageList, ClientList, MailingList, MailingStatistic
+from client.views import ClientList
+from mailing.views import MailingList, MailingStatistic
+from message.views import MessageList
 
 router = SimpleRouter()
 

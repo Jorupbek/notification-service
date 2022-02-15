@@ -5,7 +5,7 @@ from mailing.models import Mailing
 
 
 SEND_STATUS = [
-    ('Принято', 'Принято'),
+    ('Отправка', 'Отправка'),
     ('В очереди', 'В очереди'),
     ('Доставлено', 'Доставлено'),
     ('Частично доставлено', 'Частично доставлено'),
@@ -16,7 +16,7 @@ SEND_STATUS = [
 class Message(models.Model):
     date_created = models.DateTimeField('Дата и время создания (отправки)')
     status = models.CharField(max_length=100, choices=SEND_STATUS,
-                              default='В очереди',
+                              default='Отправка',
                               verbose_name="Выбор статуса")
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE,
                                 related_name='messages')

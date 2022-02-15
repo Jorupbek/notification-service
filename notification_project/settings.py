@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # installed apps
     'rest_framework',
     'drf_yasg',
+    'django_filters',
 
     # my apps
     'api.apps.ApiConfig',
@@ -156,4 +157,8 @@ CELERY_BEAT_SCHEDULE = {
         "task": "notification_project.tasks.send_email_report",
         "schedule": crontab(hour="*/10"),
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
