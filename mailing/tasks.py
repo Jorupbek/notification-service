@@ -10,22 +10,24 @@ logger = get_task_logger(__name__)
 
 
 @shared_task
-def send_message(operator, instance):
+def send_message(operator, instance_id):
     """Функция для создания сообщения и отправка сообщения
 
     Args:
       operator: Список отфоматированных клиентов
-      instance: Текущая рассылка
+      instance_id: id текущей рассылки
 
     """
-    now = timezone.now()
     msgs = []
-    mailing = Mailing.objects.get(id=instance)
+    now = timezone.now()
+    mailing = Mailing.objects.get(id=instance_id)
     clients_list = Client.objects.filter(operator_id=operator)
-    if mailing.data_start < now < mailing.data_end:
-        for client in clients_list:
-            msgs.append(Message(date_created=now, status='Отправка',
-                                  mailing=mailing, client=client))
 
-    Message.objects.bulk_create(msgs)
-    logger.info("Рассылка сообщений отправлено")
+    for client in clients_list:
+        msgs.append(Message(date_created=now, status='Отправка',
+                              mailing=mailing, client=client))
+    try:
+        Message.objects.bulk_create(msgs)
+        logger.info("Рассылка сообщений отправлено")
+    except Exception as e:
+        logger.error(f"Сообщения не отправлены по причине ошибки: ", e)

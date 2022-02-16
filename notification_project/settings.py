@@ -14,6 +14,8 @@ from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'django_filters',
+    'taggit',
 
     # my apps
     'api.apps.ApiConfig',
@@ -150,4 +153,18 @@ CELERY_RESULT_BACKEND = "redis://redis:6379"
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+EMAIL_HOST = 'SMTP_HOST'
+EMAIL_PORT = 'SMTP_PORT'
+EMAIL_HOST_USER = 'SMTP_USER'
+EMAIL_HOST_PASSWORD = 'SMTP_PASSWORD'
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CELERY_BEAT_SCHEDULE = {
+    "sample_task": {
+        "task": "message.tasks.every_day_mail_sendler",
+        "schedule": crontab(minute="*/1"),
+    },
 }

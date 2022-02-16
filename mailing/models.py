@@ -1,4 +1,5 @@
 from django.db import models
+from taggit.managers import TaggableManager
 
 from client.models import OperatorCode
 
@@ -8,6 +9,7 @@ class Mailing(models.Model):
     data_start = models.DateTimeField('Дата и время запуска рассылки')
     data_end = models.DateTimeField('Дата и время окончания рассылки')
     operator = models.ForeignKey(OperatorCode, on_delete=models.CASCADE)
+    tags = TaggableManager()
 
     def __str__(self):
         return self.text

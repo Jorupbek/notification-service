@@ -1,4 +1,5 @@
 from django.db import models
+from taggit.managers import TaggableManager
 
 
 class Client(models.Model):
@@ -7,7 +8,7 @@ class Client(models.Model):
                                     max_length=150
                                     )
     operator = models.ForeignKey('OperatorCode', on_delete=models.CASCADE)
-    tag = models.CharField('Тег (произвольная метка)', max_length=100)
+    tags = TaggableManager()
     time_zone = models.ForeignKey('TimeZone', on_delete=models.CASCADE)
 
     def __str__(self):
